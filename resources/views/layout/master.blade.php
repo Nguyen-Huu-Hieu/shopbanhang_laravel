@@ -135,6 +135,13 @@
                         </a>
                     </li> 
 
+                    <li class="sub-menu">
+                        <a href="{{ Route('ManageOrder')}}">
+                            <i class="fa fa-book"></i>
+                            <span>Quản lý đơn hàng</span>
+                        </a>
+                    </li> 
+
                     {{-- <li class="sub-menu">
                         <a href="">
                             <i class="fa fa-book"></i>

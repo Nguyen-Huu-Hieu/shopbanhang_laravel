@@ -30,7 +30,9 @@ Route::get('/dang_xuat', '\App\Http\Controllers\CustomerController@Logout')->nam
 Route::get('checkout', '\App\Http\Controllers\CheckoutController@Checkout')->name('checkout');
 Route::post('save-checkout-customer', '\App\Http\Controllers\CheckoutController@SaveCheckoutCustomer')->name('save-checkout-customer');
 
-
+// quản lý đơn hàng bên trang admin
+Route::get('order', '\App\Http\Controllers\CheckoutController@ManageOrder')->name('ManageOrder');
+Route::get('order_detail/{id}', '\App\Http\Controllers\CheckoutController@OrderDetail')->name('order_detail');
 
 
 Route::get('/admin', '\App\Http\Controllers\AdminController@index')->name('admin');

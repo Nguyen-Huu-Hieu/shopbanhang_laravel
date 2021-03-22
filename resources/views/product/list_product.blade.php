@@ -57,7 +57,11 @@
                                 <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                                 </td>
                                 <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->category_id}}</td>
+                                <td>
+                                    @if($product->category_id)
+                                        {{ $product->category->category_name}}
+                                    @endif
+                                </td>
                                 {{-- <td><span class="text-ellipsis">
 									@php
 										if($category->category_status == 0) {
@@ -70,11 +74,28 @@
 									@endphp
 										
                                 </span></td> --}}
-                                <td><span class="text-ellipsis">{{ $product->brand_id }}</span></td>
-                                <td>{{ $product->product_desc}}</td>
-                                <td>{{ $product->product_content}}</td>
+                                <td><span class="text-ellipsis">
+                                    @if($product->brand_id)
+                                        {{ $product->brand->brand_name}}
+                                    @endif
+                                </span></td>
+                                <td>
+                                    @php
+                                        $rest = substr("$product->product_desc", 0, 50);
+                                        echo $result = substr($rest, 0, strrpos($rest, ' '));
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        $rest = substr("$product->product_content", 0, 50);
+                                        echo $result = substr($rest, 0, strrpos($rest, ' '));
+                                    @endphp
+                                </td>
                                 <td>{{ $product->product_price }}</td>
-                                <td>{{ $product->product_image }}</td>
+                                <td>
+                                    {{-- {{$product->getProductImage()}} --}}
+                                    <img style="width: 100px" src="{{$product->getProductImage()}}" alt="">
+                                </td>
                                 <td>{{ $product->created_at }}</td>
                                 <td style="display:flex">
                                     <a style="margin-right: 8px" href="" class="btn btn-primary" ui-toggle-class="">Sửa</a>

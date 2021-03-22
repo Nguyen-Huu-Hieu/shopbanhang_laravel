@@ -49,7 +49,7 @@
                             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                             </td>
                             <td>{{ $customer->fullname }}</td>
-                            <td>{{ $customer->email}}</td>3
+                            <td>{{ $customer->email}}</td>
                             <td>{{ $customer->gender }}</td>
                             <td>{{ $customer->address }}</td>
                             <td>{{ $customer->phone }}</td>

@@ -64,6 +64,20 @@ class CheckoutController extends Controller
         
 
         Session::put('shipping_id', $shipping->id);
-        
+        return redirect()->route('home');
+    }
+
+    public function ManageOrder()
+    {
+        $orders = Order::all();
+        $orderDetail = OrderDetail::all();
+        return view('order.manage_order', compact('orders', 'orderDetail'));
+    }
+
+    public function OrderDetail($id)
+    {
+        $orders = Order::find($id);
+        $orderDetail = OrderDetail::where('order_id', $id)->get();
+        return view('order.order_detail', compact('orders', 'orderDetail'));
     }
 }

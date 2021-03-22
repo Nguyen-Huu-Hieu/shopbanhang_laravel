@@ -18,4 +18,14 @@ class Product extends Model
         return 'https://screenshotlayer.com/images/assets/placeholder.png';
 
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id', 'category_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\ProductBrand', 'brand_id', 'id');
+    }
 }
