@@ -7,6 +7,8 @@ use App\Models\Customer;
 use Auth;
 use DB;
 use Session;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 class CustomerController extends Controller
 {
@@ -86,5 +88,42 @@ class CustomerController extends Controller
         // $customer_name = Session::get('customer_name');
         Session::put('customer_name', null);
         return redirect()->route('home');
+    }
+
+    public function AccountOrder()
+    {
+        $customer_id = Session::get('customer_id');
+        $orders_detail = OrderDetail::all();
+        $orders = Order::where('customer_id', $customer_id)->get();
+        return view('order.account_order', compact('orders', 'orders_detail'));
+    }
+
+    public function InfoAccount()
+    {
+        $customer_id = Session::get('customer_id');
+        $customer = Customer::find($customer_id);
+        return view('customer.account_info', compact('customer'));
+    }
+
+    public function ChangePassword()
+    {
+        return view('customer.change_password');
+    }
+
+    public function SaveChangePassword(Request $request)
+    {
+        $old_password = $request->input('old_password');
+        $new_password = $request->input('new_password');
+        $re_new_password = $request->input('re_new_password');
+        $customer_id = Session::get('customer_id');
+        $customer = Customer::find($customer_id);
+        if($customer->password == $old_password && $new_password == $re_new_password) {
+            $customer->password = $new_password;
+            $customer->re_password = $new_password;
+            $customer->save();
+            return back()->withSuccess('Đổi mật khẩu thành công');
+        } else {
+            return back()->withError('Đổi mật khẩu thất bại.');
+        }
     }
 }

@@ -33,6 +33,11 @@ Route::post('save-checkout-customer', '\App\Http\Controllers\CheckoutController@
 // quản lý đơn hàng bên trang admin
 Route::get('order', '\App\Http\Controllers\CheckoutController@ManageOrder')->name('ManageOrder');
 Route::get('order_detail/{id}', '\App\Http\Controllers\CheckoutController@OrderDetail')->name('order_detail');
+// xem thông tin trong tài khoản người dùng
+Route::get('account_order', '\App\Http\Controllers\CustomerController@AccountOrder')->name('account_order');
+Route::get('account_info', '\App\Http\Controllers\CustomerController@InfoAccount')->name('account_info');
+Route::get('change_password', '\App\Http\Controllers\CustomerController@ChangePassword')->name('change_password');
+Route::post('save_change_password', '\App\Http\Controllers\CustomerController@SaveChangePassword')->name('SaveChangePassword');
 
 
 Route::get('/admin', '\App\Http\Controllers\AdminController@index')->name('admin');

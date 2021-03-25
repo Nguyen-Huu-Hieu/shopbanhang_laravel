@@ -36,17 +36,17 @@
                                     <input type="checkbox"><i></i>
                                 </label>
                             </th>
+                            <th>Mã đơn hàng</th>
                             <th>Mã khách hàng</th>
                             <th>Tên khách hàng</th>
                             <th>Số ĐT</th>
                             
                             {{-- <th>Tên sản phẩm</th> --}}
                             {{-- <th>Số lượng SP</th> --}}
-                            <th>Phương thức thanh toán</th>
+                            {{-- <th>Phương thức thanh toán</th> --}}
                             <th>Địa chỉ giao hàng</th>
                             <th>Tổng tiền hàng</th>
-                            <th>Giảm giá</th>
-                            <th>Tổng cộng</th>
+                            {{-- <th>Tổng cộng</th> --}}
                             <th>Trạng thái</th>
                             {{-- <th>Hiển thị</th> --}}
                             <th>Thời gian đặt hàng</th>
@@ -58,6 +58,7 @@
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
                             </td>
+                            <td>{{ $order->id }}</td>
                             <td>{{$order->customer_id}}</td>
                             <td>
                                 @if($order->shipping_id)
@@ -78,7 +79,7 @@
                                         @endif
                                 @endforeach --}}
                      
-                            <td>
+                            {{-- <td>
                                 @php
                                 if($order->payment_id) {
                                     $payment_method = $order->payment->payment_method;
@@ -91,16 +92,21 @@
                                         
                                 }
                                 @endphp
-                            </td>
+                            </td> --}}
                             <td>
                                 @if($order->shipping_id)
                                     {{ $order->shipping->shipping_address}}
                                 @endif
                             </td>
                             <td>{{ $order->order_total}}</td>
-                            <td>0 VND</td>
-                            <td>{{ $order->order_total}}</td>
-                            <td></td>
+                            {{-- <td>{{ $order->order_total}}</td> --}}
+                            <td>
+                                @php
+                                    if($order->order_status == 0) {
+                                        echo "Chờ duyệt";
+                                    }
+                                @endphp
+                            </td>
                             <td>{{ $order->created_at}}</td>   
                             <td style="display:flex">
                                 <a style="margin-right: 8px" href="{{ Route('order_detail', $order->id)}}" class="btn btn-primary" ui-toggle-class="">Xem chi tiết</a>

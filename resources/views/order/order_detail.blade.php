@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('listCategory')
+@section('order_detail')
 
     <div class="table-agile-info">
         <div class="panel panel-default">
@@ -28,49 +28,133 @@
 			</div>
 			
             <div class="table-responsive">
-                
-                    <div class="col-sm-4">
-                        <h4>Thông tin người mua</h4>
-                        <div>
-                            <label for="">Họ tên</label>
-                            <div>{{ }}</div>
-                        </div>
-                        <div>
-                            <label for="">SĐT</label>
-                            
-                        </div>
-                        <div>
-                            <label for="">Địa chỉ nhận hàng</label>
-                            
-                        </div>
+                <div>
+                    <h4>Trạng thái đơn hàng: </h4>
+                    <div>
+                        @php
+                            if($order->order_status == 0) {
+                                echo "Chờ duyệt";
+                            }
+                        @endphp
                     </div>
-                    <div class="col-sm-4">
-                        <h4>Thông tin đơn hàng</h4>
-                        <div>
-                            <label for="">Mã SP</label>
-                            <div></div>
-                        </div>
-                        <div>
-                            <label for="">Tên SP</label>
-                            <div>{{ $orderDetail->product_name }}</div>
-                        </div>
-                        <div>
-                            <label for="">Số lượng</label>
-                            
-                        </div>
-                        <div>
-                            <label for="">Đơn giá</label>
-                            
-                        </div>
-                        <div>
-                            <label for="">Tổng tiền</label>
-                            
-                        </div>
-                    </div>
-                
+                </div>
 
+                <h4>Thông tin người mua</h4>
+                <table>
+                    <tr>
+                        <td>Họ tên: </td>
+                        <td>
+                            @if($order->shipping_id)
+                                {{ $order->shipping->shipping_name}}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SĐT: </td>
+                        <td>
+                            @if($order->shipping_id)
+                                {{ $order->shipping->shipping_phone}}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td>
+                            @if($order->shipping_id)
+                                {{ $order->shipping->shipping_email}}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ nhận hàng: </td>
+                        <td>
+                            @if($order->shipping_id)
+                                {{ $order->shipping->shipping_address}}
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ghi chú: </td>
+                        <td>
+                            @if($order->shipping_id)
+                                {{ $order->shipping->shipping_note}}
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+                
             </div>
-            <footer class="panel-footer">
+            <div>
+                <h4>Phương thức thanh toán</h4>
+                <div>
+                    @php
+                        if($order->payment_id) {
+                            $payment = $order->payment->payment_method;
+                            if($payment == 0) {echo "Thanh toán khi nhận hàng";}
+                            else echo "Chuyển khoản";
+                        }
+                    @endphp
+                </div>
+            </div>
+
+            <h4>Thông tin đơn hàng</h4>
+            <div>
+                <table border="1px">
+                    <thead>
+                        <tr>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Giảm giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($orderDetail as $order_detail)
+                            
+                            <tr>
+                                <td>{{ $order_detail->product_id}}</td>
+                                <td>{{ $order_detail->product_name}}</td>
+                                <td>{{ $order_detail->product_sales_quantity}}</td>
+                                <td>{{ $order_detail->product_price}}</td>
+                                <td>0</td>
+                                <td>
+                                    @php
+                                        $qty = $order_detail->product_sales_quantity;
+                                        $price = $order_detail->product_price;
+                                        $detail_price = $qty * $price;
+                                        echo $detail_price;
+                                    @endphp
+                                </td>
+                            </tr>
+                            
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>Tổng tiền hàng:</td>
+                        <td>{{ $order->order_total}}</td>
+                    </tr>
+                    <tr>
+                        <td>Khuyến mãi:</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Phí vận chuyển: </td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Tổng cộng:</td>
+                        <td>{{ $order->order_total}} đ</td>
+                    </tr>
+                </table>
+            </div>
+     
+            {{-- <footer class="panel-footer">
                 <div class="row">
 
                     <div class="col-sm-5 text-center">
@@ -87,7 +171,7 @@
                         </ul>
                     </div>
                 </div>
-            </footer>
+            </footer> --}}
         </div>
     </div>
 

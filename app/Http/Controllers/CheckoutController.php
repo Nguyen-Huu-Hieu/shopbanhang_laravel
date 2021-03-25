@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         $payment = new Payment;
         $payment_method = $request->input('payment_method');
         $payment->payment_method = $payment_method;
-        $payment->payment_status = '0';
+        $payment->payment_status = '0';  // 0: trả tiền khi nhận hàng, 1: chuyển khoản
         $payment->save();
 
         // DL bang Order
@@ -76,8 +76,8 @@ class CheckoutController extends Controller
 
     public function OrderDetail($id)
     {
-        $orders = Order::find($id);
+        $order = Order::find($id);
         $orderDetail = OrderDetail::where('order_id', $id)->get();
-        return view('order.order_detail', compact('orders', 'orderDetail'));
+        return view('order.order_detail', compact('order', 'orderDetail'));
     }
 }
