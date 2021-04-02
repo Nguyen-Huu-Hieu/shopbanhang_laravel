@@ -37,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				Session::put('message', null);
 			}
 		@endphp
-
+		<h3 style="text-align: center">Đăng nhập quản trị</h3>
 		<form action="{{URL::to('/admin-dashboard')}}" method="post">
 		@csrf
 			<input type="email" class="ggg" name="admin_email" placeholder="Email" required="" value="huuhieu2468@gmail.com">

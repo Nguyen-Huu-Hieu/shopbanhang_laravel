@@ -78,12 +78,12 @@
                     <li><a href="#"><i class=" fa fa-suitcase"></i>Tài khoản</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>Cài đặt</a></li>
                     <li>
-                        {{-- <a href="{{route('logout')}}"><i class="fa fa-key">
-                            </i>Đăng xuất</a> --}}
-                        <form action="{{ route('logout')}}" method="POST">
+                        <a href="{{route('logout')}}"><i class="fa fa-key">
+                            </i>Đăng xuất</a>
+                        {{-- <form action="{{ route('logout')}}" method="POST">
                             @csrf
                             <button type="submit" style="border: none; background: none; outline: none">Đăng xuất<button>
-                        </form>
+                        </form> --}}
                     </li>
                 </ul>
             </li>

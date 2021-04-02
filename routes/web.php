@@ -44,7 +44,7 @@ Route::get('/admin', '\App\Http\Controllers\AdminController@index')->name('admin
 Route::get('/dashboard', '\App\Http\Controllers\AdminController@show_dashboard');
 Route::post('/admin-dashboard', '\App\Http\Controllers\AdminController@dashboard');
 
-Route::post('logout', '\App\Http\Controllers\AdminController@logout')->name('logout'); //ko nen dung get de lam logout
+Route::get('logout', '\App\Http\Controllers\AdminController@logout')->name('logout'); //ko nen dung get de lam logout
 
 //category product
 Route::get('addCategoryProduct', '\App\Http\Controllers\CategoryController@addCategoryProduct')->name('addCategoryProduct');
